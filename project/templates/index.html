@@ -1,10 +1,32 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1 class="title">
-  Flask Login Example
-</h1>
-<h2 class="subtitle">
-  Easy authentication and authorization in Flask.
-</h2>
+    <section class="max-w-screen-xl p-4 mx-auto flex gap-x-4">
+        <div class="py-24 mx-auto sm:px-6 lg:px-8">
+            <div class="max-w-3xl mx-auto">
+                <h1 class="text-3xl font-extrabold text-transparent
+                        sm:text-6xl bg-clip-text bg-gradient-to-r from-zinc-800 via-gray-700 to-pink-500">
+                    The Vacation Scheduler
+                </h1>
+
+                <div class="mx-auto text-lg mt-6">
+                    <p>
+                        The calendar software provides a visual representation of the absences in your company at any
+                        moment in time. The Software tracks staff vacations and sick and other types of leaves for all
+                        your company employees.
+                        {#Moreover, you can filter the vacation calendar by team, location, or period.#}
+                    </p>
+                </div>
+
+                <div class="mt-8">
+                    <a href="{{ url_for('auth.signup') }}"
+                       class="inline-block px-8 py-2 font-medium text-white bg-zinc-600 rounded-lg
+                        shadow-lg hover:bg-zinc-700">
+                        <p class="border-b-2 pb-1">Get Started</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <img src="{{ url_for('static', filename='heroimage.jpg') }}" alt="heroimage" class="h-[600px] object-cover"/>
+    </section>
 {% endblock %}

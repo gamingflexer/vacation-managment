@@ -1,36 +1,43 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="column is-4 is-offset-4">
-    <h3 class="title">Login</h3>
-    <div class="box">
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        <div class="notification is-danger">
-            {{ messages[0] }}
+    <div class="my-20 max-w-lg mx-auto px-8 py-8" style="'Raleway', sans-serif;">
+        <h3 class="text-4xl my-4 font-semibold">Employee Login</h3>
+        <hr>
+        <div class="">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="bg-red-300 p-2 my-2">
+                        {{ messages[0] }}
+                    </div>
+                {% endif %}
+            {% endwith %}
+            <form method="POST" action="/login" autocomplete="off" class="">
+                <div class="w-full mx-auto mt-8">
+                    <form class="bg-white px-8 pb-8 mb-4">
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-semibold mb-2 text-xl" for="email">
+                                Email
+                            </label>
+                            <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                   name="email" id="email" type="email" placeholder=""
+                                   autofocus="">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-semibold mb-2 text-xl" for="password">
+                                Password
+                            </label>
+                            <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                   id="password" name="password" type="password" placeholder="">
+                        </div>
+                        <div>
+                            <button class="bg-gray-500 hover:bg-gray-700 text-white w-full font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                                Login
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </form>
         </div>
-        {% endif %}
-        {% endwith %}
-        <form method="POST" action="/login" autocomplete="off">
-            <div class="field">
-                <div class="control">
-                    <input class="input is-large" type="email" name="email" placeholder="Your Email" autofocus="">
-                </div>
-            </div>
-
-            <div class="field">
-                <div class="control">
-                    <input class="input is-large" type="password" name="password" placeholder="Your Password">
-                </div>
-            </div>
-            <div class="field">
-                <label class="checkbox">
-                    <input type="checkbox" name="remember">
-                    Remember me
-                </label>
-            </div>
-            <button class="button is-block is-info is-large is-fullwidth">Login</button>
-        </form>
     </div>
-</div>
 {% endblock %}

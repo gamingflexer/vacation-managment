@@ -2,7 +2,7 @@
 
 {% block content %}
     <div class="my-20 max-w-lg mx-auto px-8 py-8" style="'Raleway', sans-serif;">
-        <h3 class="text-4xl my-4 font-semibold">Register New Employee</h3>
+        <h3 class="text-4xl my-4 font-semibold">Admin Login</h3>
         <hr>
         <div class="">
             {% with messages = get_flashed_messages() %}
@@ -12,16 +12,9 @@
                     </div>
                 {% endif %}
             {% endwith %}
-            <form method="POST" action="/signup" autocomplete="off" class="">
+            <form method="POST" action="/admin-login" autocomplete="off" class="">
                 <div class="w-full mx-auto mt-8">
                     <form class="bg-white px-8 pb-8 mb-4">
-                        <div class="mb-4">
-                            <label class="block text-gray-700 text-sm font-semibold mb-2 text-xl" for="name">
-                                Name
-                            </label>
-                            <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                   name="name" id="name" type="text" placeholder="" autofocus="">
-                        </div>
                         <div class="mb-4">
                             <label class="block text-gray-700 text-sm font-semibold mb-2 text-xl" for="email">
                                 Email

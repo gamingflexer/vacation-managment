@@ -1,7 +1,52 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1 class="title">
-  Welcome, {{ name }}!
-</h1>
+    <div class="my-3 font-light text-3xl">Profile - Employee Details</div>
+    <hr class="my-3">
+    <h1 class="title">
+        <main class="profile-page">
+            <div class="container mx-auto">
+                <div
+                        class="flex flex-col min-w-0 break-words bg-white w-full mb-6"
+                >
+                    <div class="px-6">
+                        <div class="text-center mt-12">
+                            <h3
+                                    class="text-4xl font-semibold leading-normal text-gray-800"
+                            >
+                                {{ name }}
+                            </h3>
+                            <div class="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold text-gray-700">
+                                {{ email }}
+                            </div>
+                            <div
+                                    class="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase"
+                            >
+                                Los Angeles, California
+                            </div>
+                            <div class="mb-2 text-gray-700 mt-10">
+                                Solution Manager - Creative Tim Officer
+                            </div>
+                            <div class="mb-2 text-gray-700">
+                                University of Computer Science
+                            </div>
+                        </div>
+                        <div class="mt-10 py-10 border-t border-gray-300 text-center">
+                            <div class="flex flex-wrap justify-center">
+                                <div class="w-full lg:w-9/12 px-4">
+                                    <p class="mb-4 text-lg leading-relaxed text-gray-800">
+                                        An artist of considerable range, Jenna the name taken by
+                                        Melbourne-raised, Brooklyn-based Nick Murphy writes,
+                                        performs and records all of his own music, giving it a
+                                        warm, intimate feel with a solid groove structure. An
+                                        artist of considerable range.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </h1>
 {% endblock %}

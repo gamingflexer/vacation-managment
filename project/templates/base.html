@@ -5,52 +5,66 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Flask Auth Example</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css"/>
+    <title>Vacation Schedular</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baskervville&family=Roboto:wght@100;300;400;500;700;900&display=swap"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;400;500;600&display=swap" rel="stylesheet">
 </head>
 
-<body>
-<section class="hero is-primary is-fullheight">
-
-    <div class="hero-head">
-        <nav class="navbar">
-            <div class="container">
-                <div id="navbarMenuHeroA" class="navbar-menu">
-                    <div class="navbar-end">
-                        <a href="{{ url_for('main.index') }}" class="navbar-item">
-                            Home
-                        </a>
-                        {% if current_user.is_authenticated %}
-                        <a href="{{ url_for('main.profile') }}" class="navbar-item">
-                            Profile
-                        </a>
-                        {% endif %}
-                        {% if not current_user.is_authenticated %}
-                        <a href="{{ url_for('auth.login') }}" class="navbar-item">
-                            Login
-                        </a>
-                        <a href="{{ url_for('auth.signup') }}" class="navbar-item">
-                            Sign Up
-                        </a>
-                        {% endif %}
-                        {% if current_user.is_authenticated %}
-                        <a href="{{ url_for('auth.logout') }}" class="navbar-item">
-                            Logout
-                        </a>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </div>
-
-    <div class="hero-body">
-        <div class="container has-text-centered">
-            {% block content %}
-            {% endblock %}
+<body style="'Raleway', sans-serif;">
+<section class="shadow-lg bg-zinc-700 text-white" style="font-family: 'Raleway', sans-serif;">
+    <div id="navbarMenuHeroA"
+         class="text-lg flex flex-row max-w-screen-xl mx-auto justify-between items-center">
+        <div class="px-2 py-6">
+            <a href="{{ url_for('main.index') }}"
+               class="hover:text-blue-400 font-bold tracking-wide ">
+                The Vacation Schedular
+            </a>
+        </div>
+        <div class="flex gap-x-6">
+            {% if current_user.is_authenticated %}
+                <a href="{{ url_for('main.employee_dashboard') }}" class="hover:text-blue-500 border-b-2 pb-1">
+                    Dashboard
+                </a>
+                <a href="{{ url_for('main.leave_application') }}" class="hover:text-blue-500 border-b-2 pb-1">
+                    Apply for vacation
+                </a>
+                <a href="{{ url_for('main.profile') }}" class="hover:text-blue-500 border-b-2 pb-1">
+                    Profile
+                </a>
+            {% endif %}
+            {% if not current_user.is_authenticated %}
+                <a href="{{ url_for('main.index') }}" class="hover:text-blue-400 border-b-2 pb-1">
+                    Home
+                </a>
+                <a href="{{ url_for('auth.admin_login') }}" class="hover:text-blue-400 border-b-2 pb-1">
+                    Admin Login
+                </a>
+                <a href="{{ url_for('auth.login') }}" class="hover:text-blue-400 border-b-2 pb-1">
+                    Login
+                </a>
+                <a href="{{ url_for('auth.signup') }}" class="hover:text-blue-400 border-b-2 pb-1">
+                    Sign Up
+                </a>
+            {% endif %}
+            {% if current_user.is_authenticated %}
+                <a href="{{ url_for('auth.logout') }}" class="hover:text-red-400 text-red-600 border-b-2 pb-1">
+                    Logout
+                </a>
+            {% endif %}
         </div>
     </div>
 </section>
+
+<div class="max-w-screen-xl mx-auto p-2">
+    <div>
+        {% block content %}
+        {% endblock %}
+    </div>
+</div>
 </body>
 
 </html>

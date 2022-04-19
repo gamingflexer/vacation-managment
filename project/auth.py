@@ -27,7 +27,7 @@ def login_post():
         flash('Please check your login details and try again.')
         return redirect(url_for('auth.login'))  # if the user doesn't exist or password is wrong, reload the page
     login_user(user, remember=remember)
-    return redirect(url_for('main.profile'))
+    return redirect(url_for('main.employee_dashboard'))
 
 
 @auth.route('/signup')
@@ -64,3 +64,20 @@ def signup_post():
 def logout():
     logout_user()
     return redirect(url_for('main.index'))
+
+
+@auth.route('/admin-login')
+def admin_login():
+    return render_template('admin_login.html')
+
+
+@auth.route('/admin-login', methods=['POST'])
+def admin_login_post():
+    email = request.form.get('email')
+    password = request.form.get('password')
+
+    if email != "admin@gmail.com" and password != "admin":
+        flash('Please check your login details and try again.')
+        return redirect(url_for('auth.login'))  # if the user doesn't exist or password is wrong, reload the page
+
+    return redirect(url_for('main.admin_dashboard'))

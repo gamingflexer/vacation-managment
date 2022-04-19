@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Vacation Schedular</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baskervville&family=Roboto:wght@100;300;400;500;700;900&display=swap"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body style="'Raleway', sans-serif;">
+<section class="shadow-lg bg-zinc-700 text-white" style="font-family: 'Raleway', sans-serif;">
+    <div id="navbarMenuHeroA"
+         class="text-lg flex flex-row max-w-screen-xl mx-auto justify-between items-center">
+        <div class="px-2 py-6">
+            <a href="{{ url_for('main.index') }}"
+               class="hover:text-blue-400 font-bold tracking-wide ">
+                The Vacation Schedular
+            </a>
+        </div>
+        <div class="flex gap-x-6">
+            <a href="{{ url_for('main.admin_dashboard') }}" class="hover:text-blue-500 border-b-2 pb-1">
+                Dashboard
+            </a>
+            <a href="{{ url_for('main.vacation_applications') }}" class="hover:text-blue-500 border-b-2 pb-1">
+                Vacation Applications
+            </a>
+            <a href="{{ url_for('main.index') }}" class="hover:text-red-400 text-red-600 border-b-2 pb-1">
+                Logout
+            </a>
+        </div>
+    </div>
+</section>
+
+<div class="max-w-screen-xl mx-auto p-2">
+    <div>
+        {% block content %}
+        {% endblock %}
+    </div>
+</div>
+</body>
+
+</html>

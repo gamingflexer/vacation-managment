@@ -29,13 +29,13 @@ def profile():
 @login_required
 @main.route('/employee-dashboard')
 def employee_dashboard():
-    with connection.cursor() as cursor:
-        data = cursor.execute("Select eid,name,reason,sdate,edate from employee ")
-    if data > 0:
-        row = cursor.fetchall()
-    connection.commit()
+    # with connection.cursor() as cursor:
+    #     data = cursor.execute("Select eid,name,reason,sdate,edate from employee ")
+    # if data > 0:
+    #     row = cursor.fetchall()
+    # connection.commit()
     # cursor.close()
-    return render_template('employee_dashboard.html', row=row)
+    return render_template('employee_dashboard.html')
 
 
 @main.route('/leave-application')

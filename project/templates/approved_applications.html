@@ -1,7 +1,7 @@
 {% extends "base2.html" %}
 
 {% block content %}
-    <div class="my-3 font-light text-3xl">Vacation Applications</div>
+    <div class="my-3 font-light text-3xl">Approved Applications</div>
     <hr class="my-3">
     <div class="flex flex-col">
         <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -46,19 +46,8 @@
                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border-r">
                                 16-4-2022
                             </td>
-                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border-r">
-                                <form method="POST" action="/accept/application-id" autocomplete="off" class="">
-                                    <input value="approved" class="hidden" name="admin_response">
-                                    <button class="bg-green-500 hover:bg-green-700 text-white w-full font-bold py-2 px-4 mb-3 rounded focus:outline-none focus:shadow-outline">
-                                        Approve
-                                    </button>
-                                </form>
-                                <form method="POST" action="/reject/application-id" autocomplete="off" class="">
-                                    <input value="rejected" class="hidden" name="admin_response">
-                                    <button class="bg-red-500 hover:bg-red-700 text-white w-full font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                                        Reject
-                                    </button>
-                                </form>
+                            <td class="text-sm bg-green-200 text-gray-900 font-light px-6 py-4 whitespace-nowrap border-r">
+                                Approved
                             </td>
                         </tr>
                         </tbody>

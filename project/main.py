@@ -32,6 +32,11 @@ def admin_dashboard():
     return render_template('admin_dashboard.html')
 
 
-@main.route('/vacation_applications')
+@main.route('/vacation-applications')
 def vacation_applications():
     return render_template('vacation_applications.html')
+
+
+@main.route('/approved-applications')
+def approved_applications():
+    return render_template('approved_applications.html')

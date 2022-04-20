@@ -1,5 +1,5 @@
 {% extends "base2.html" %}
-
+{{row}}
 {% block content %}
     <div class="my-3 font-light text-3xl">Approved Applications</div>
     <hr class="my-3">
@@ -31,25 +31,26 @@
                         </tr>
                         </thead>
                         <tbody>
-                        {# for loop goes here #}
+                        {% for data in row %}
                         <tr class="border-b">
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r">1</td>
                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border-r">
-                                Mark
+                                {{data['name']}}
                             </td>
                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border-r">
-                                Sick Leave
+                                {{data['reason']}}
                             </td>
                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border-r">
-                                12-4-2022
+                                {{data['sdate']}}
                             </td>
                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border-r">
-                                16-4-2022
+                                {{data['edate']}}
                             </td>
                             <td class="text-sm bg-green-200 text-gray-900 font-light px-6 py-4 whitespace-nowrap border-r">
-                                Approved
+                                {{data['approved']}}
                             </td>
                         </tr>
+                        {% endfor %}
                         </tbody>
                     </table>
                 </div>

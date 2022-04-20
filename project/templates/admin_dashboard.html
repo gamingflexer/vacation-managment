@@ -1,6 +1,20 @@
 {% extends "base2.html" %}
 
 {% block content %}
-    <div class="my-3 font-light text-3xl">Admin Dashboard</div>
-      <hr class="my-3">
+<div>
+  <p class="font-light text-3xl mt-6 mb-3">DASHBOARD</p>
+  <hr/>
+</div>
+<div class="flex gap-x-4 py-8 justify-between">
+  <div class="my-8">
+      <a href="{{ url_for('main.approved_applications') }}"
+         class="bg-blue-600 hover:bg-blue-700 text-2xl mr-4 text-white px-4 py-6 rounded rounded-3xl">
+          Approved Applications
+      </a>
+      <a href="{{ url_for('main.vacation_applications') }}"
+         class="bg-blue-600 hover:bg-blue-700 text-2xl text-white px-4 py-6 rounded rounded-3xl">
+          Applications
+      </a>
+  </div>
+</div>
 {% endblock %}

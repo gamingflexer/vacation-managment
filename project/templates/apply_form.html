@@ -3,4 +3,54 @@
 {% block content %}
     <div class="my-3 font-light text-3xl">Apply For Leave</div>
     <hr class="my-3">
+    <form method="POST" action="/added" autocomplete="off" class="my-6">
+        <div class="my-4">
+            <label for="eid" class="block mb-2 font-medium">Employee Id</label>
+            <input id="eid" name="eid" type="text" autofocus=""
+                      class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500"
+                      placeholder="">
+        </div>
+        <div class="my-4">
+            <label for="reason" class="block mb-2 font-medium">Reason</label>
+            <input id="reason" name="reason" type="text" autofocus=""
+                      class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500"
+                      placeholder="Tell us the reason.">
+        </div>
+        <div class="flex gap-x-4">
+            <div class="my-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2">
+                    Start Date
+                </label>
+                <div id="start_date"></div>
+            </div>
+            <div class="my-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2">
+                    End Date
+                </label>
+                <div id="end_date"></div>
+            </div>
+        </div>
+        <div class="my-4">
+            <button type="submit"
+                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                Apply
+            </button>
+        </div>
+    </form>
+    <script>
+        function TodayDate() {
+            let data = new Date();
+            return data.getFullYear().toString() + '-' + (data.getMonth() + 1).toString() + '-' + data.getDate().toString()
+        }
+
+        document.getElementById('start_date').innerHTML = '<input name="start_date" type="date" class="shadow border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow" value="' + TodayDate() + '" ><br>';
+    </script>
+    <script>
+        function TodayDate() {
+            let data = new Date();
+            return data.getFullYear().toString() + '-' + (data.getMonth() + 1).toString() + '-' + data.getDate().toString()
+        }
+
+        document.getElementById('end_date').innerHTML = '<input name="end_date" type="date" class="shadow border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value="' + TodayDate() + '" ><br>';
+    </script>
 {% endblock %}

@@ -1,0 +1,7 @@
+flask
+flask_login
+pymysql
+flask_sqlalchemy
+mysql
+mysql.connector
+sqllite

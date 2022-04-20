@@ -1,6 +1,57 @@
 {% extends "base.html" %}
-
+{{row}}
 {% block content %}
-     <div class="my-3 font-light text-3xl">Employee Dashboard</div>
-      <hr class="my-3">
+    <div class="my-3 font-light text-3xl">Employee Dashboard</div>
+    <hr>
+     <div class="mt-5 font-normal text-2xl text-purple-800">Previous Applications</div>
+    <div class="flex flex-col">
+        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+                <div class="overflow-hidden">
+                    <table class="min-w-full border text-center">
+                        <thead class="border-b">
+                        <tr>
+                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 border-r">
+                                Employee Id
+                            </th>
+                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 border-r">
+                                Reason
+                            </th>
+                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 border-r">
+                                Start Date
+                            </th>
+                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 border-r">
+                                End Date
+                            </th>
+                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 border-r">
+                                Status
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {# for loop goes here #}
+                        {% for data in row %}
+                        <tr class="border-b">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r">1</td>
+                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border-r">
+                                {{data['reason2']}}
+                            </td>
+                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border-r">
+                                {{data['sdate']}}
+                            </td>
+                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border-r">
+                                {{data['edate']}}
+                            </td>
+                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border-r">
+                                {{data['approved']}}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}

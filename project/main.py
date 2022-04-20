@@ -1,14 +1,15 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request,redirect,url_for
 from flask_login import login_required, current_user
 from . import db
 import pymysql.cursors
-
 pymysql.install_as_MySQLdb()
+
+
 
 connection = pymysql.connect(host='dpomserver.mysql.database.azure.com',
                              user='dpomserver@dpomserver',
                              password='#Freelance#123',
-                             db='p1m',
+                             db='p2v',
                              charset='utf8mb4',
                              cursorclass=pymysql.cursors.DictCursor)
 
@@ -19,78 +20,95 @@ main = Blueprint('main', __name__)
 def index():
     return render_template('index.html')
 
+@main.route('/verify')
+def verify():
+    return render_template('verify.html')
 
 @login_required
 @main.route('/profile')
 def profile():
-    return render_template('profile.html', name=current_user.name, email=current_user.email)
+    return render_template('profile.html', name="current_user.name", email="current_user.email")
 
 
 @login_required
 @main.route('/employee-dashboard')
 def employee_dashboard():
-    # with connection.cursor() as cursor:
-    #     data = cursor.execute("Select eid,name,reason,sdate,edate from employee ")
-    # if data > 0:
-    #     row = cursor.fetchall()
-    # connection.commit()
-    # cursor.close()
-    return render_template('employee_dashboard.html')
-
-
-@main.route('/leave-application')
-def leave_application():
-    return render_template('apply_form.html')
+    with connection.cursor() as cursor0:
+        data = cursor0.execute("Select name,reason2,sdate,edate,approved from employee ")
+    if data > 0:
+        row = cursor0.fetchall()
+    connection.commit()
+    #cursor.close()
+    return render_template('employee_dashboard.html',row=row)
 
 
 # admin
-@login_required
-@main.route('/admin-dashboard')
+@main.route('/admin-dashboard', methods=["POST", "GET"])
 def admin_dashboard():
+    return render_template('admin_dashboard.html')
+
+
+@main.route('/vacation_applications', methods=["POST", "GET"])
+def vacation_applications():
+    try:
+        with connection.cursor() as cursor:
+            data = cursor.execute("SELECT * from employee WHERE approved='Pending' ")
+        if data > 0:
+            row = cursor.fetchall()
+            connection.commit()
+        else:
+            row = []
+    except Exception as e:
+        row = []
+        print("error" + e[10])
+    # cursor.close()
+    return render_template('vacation_applications.html',row=row)
+
+@main.route('/approved-dashboard')
+def approved_applications():
     with connection.cursor() as cursor:
-        data = cursor.execute("Select * from employee ")
+        data = cursor.execute("SELECT * from employee WHERE approved='approved' ")
     if data > 0:
         row = cursor.fetchall()
     connection.commit()
     # cursor.close()
-    return render_template('admin_dashboard.html.html', row=row)
+    return render_template('approved_applications.html',row=row)
+
+@main.route('/leave-application', methods=["POST", "GET"])
+def leave_application():
+    return render_template('apply_form.html')
 
 
-@main.route('/vacation_applications')
-def vacation_applications():
-    return render_template('vacation_applications.html')
-
-
-##################################################################################################################################################################################################################
-
-# sql routes
-@main.route('/holiday', methods=["POST", "GET"])
-def book_tickets():
-    return render_template('book_tickets.html')
-
-
-@main.route('/apply', methods=["POST", "GET"])
-def apply():
-    name = request.form.get('name')
-    eid = request.form.get('eid')
+@main.route('/added', methods=["POST", "GET"])
+def added():
     reason = request.form.get('reason')
-    sdate = request.form.get('date1')
-    edate = request.form.get('date2')
-    with connection.cursor() as cursor:
-        cursor.execute("INSERT INTO employee(name,reason,sdate,edate) VALUES (%s,%s,%s,%s,%s) WHERE eid=(%s)",
-                       (name, reason, sdate, edate,), (eid,))
-        connection.commit()
-    # cursor.close()
-    return render_template('booked.html', bname=name, beid=eid, breason=reason, bdate=sdate, bedate=edate)
-
-
-@main.route('/ifapprove', methods=["POST", "GET"])
-def ifapprove():
+    sdate = request.form.get('start_date')
+    edate = request.form.get('end_date')
     eid = request.form.get('eid')
-    approve = request.form.get('approve')
-    if approve == 1:
-        with connection.cursor() as cursor:
-            cursor.execute("UPDATE employee SET approved=%s WHERE id=%s", (approve, eid,))
-        connection.commit()
+    
+    print(reason,sdate,edate,eid)
 
-    return render_template('book_tickets.html')
+    with connection.cursor() as cursor:
+        cursor.execute("update employee set reason2=%s, sdate=%s, edate=%s ,approved='Pending' where eid=%s ",(reason,sdate,edate,eid,))
+        connection.commit()
+    return render_template('employee_dashboard.html')
+
+@main.route('/accept/<int:eid>', methods=["POST", "GET"])
+def approval(eid):
+    approve = request.form.get('admin_response')
+    with connection.cursor() as cursor:
+        data = cursor.execute("UPDATE employee set approved = %s WHERE eid =%s",(approve,eid,))
+    if data > 0:
+        row = cursor.fetchall()
+    connection.commit()
+    return redirect(url_for('main.approved_applications'))
+
+@main.route('/reject/<int:eid>', methods=["POST", "GET"])
+def reject(eid):
+    approve = request.form.get('admin_response')
+    with connection.cursor() as cursor:
+        data = cursor.execute("UPDATE employee set approved = %s WHERE eid =%s",(approve,eid,))
+    if data > 0:
+        row = cursor.fetchall()
+    connection.commit()
+    return redirect(url_for('main.approved_applications'))

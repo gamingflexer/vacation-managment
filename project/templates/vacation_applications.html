@@ -1,5 +1,5 @@
 {% extends "base2.html" %}
-
+{{row}}
 {% block content %}
     <div class="my-3 font-light text-3xl">Vacation Applications</div>
     <hr class="my-3">
@@ -9,6 +9,7 @@
                 <div class="overflow-hidden">
                     <table class="min-w-full border text-center">
                         <thead class="border-b">
+                        {% if row |length !=0 %}
                         <tr>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 border-r">
                                 Employee Id
@@ -32,35 +33,42 @@
                         </thead>
                         <tbody>
                         {# for loop goes here #}
-                        <tr class="border-b">
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r">1</td>
-                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border-r">
-                                Mark
-                            </td>
-                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border-r">
-                                Sick Leave
-                            </td>
-                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border-r">
-                                12-4-2022
-                            </td>
-                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border-r">
-                                16-4-2022
-                            </td>
-                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border-r">
-                                <form method="POST" action="/accept/application-id" autocomplete="off" class="">
-                                    <input value="approved" class="hidden" name="admin_response">
-                                    <button class="bg-green-500 hover:bg-green-700 text-white w-full font-bold py-2 px-4 mb-3 rounded focus:outline-none focus:shadow-outline">
-                                        Approve
-                                    </button>
-                                </form>
-                                <form method="POST" action="/reject/application-id" autocomplete="off" class="">
-                                    <input value="rejected" class="hidden" name="admin_response">
-                                    <button class="bg-red-500 hover:bg-red-700 text-white w-full font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                                        Reject
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
+
+                            {% for data in row %}
+                            <tr class="border-b">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r">1</td>
+                                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border-r">
+                                    {{data['name']}}
+                                </td>
+                                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border-r">
+                                    {{data['reason2']}}
+                                </td>
+                                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border-r">
+                                    {{data['sdate']}}
+                                </td>
+                                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border-r">
+                                    {{data['edate']}}
+                                </td>
+                                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border-r">
+                                    <form method="POST" action="/accept/{{data['eid']}}" autocomplete="off" class="">
+                                        <input value="approved" class="hidden" name="admin_response">
+                                        <button class="bg-green-500 hover:bg-green-700 text-white w-full font-bold py-2 px-4 mb-3 rounded focus:outline-none focus:shadow-outline">
+                                            Approve
+                                        </button>
+                                    </form>
+                                    <form method="POST" action="/reject/{{data['eid']}}" autocomplete="off" class="">
+                                        <input value="rejected" class="hidden" name="admin_response">
+                                        <button class="bg-red-500 hover:bg-red-700 text-white w-full font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                                            Reject
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        {% else: %}
+                            <div class="my-3 font-light text-3xl">No Applications</div>
+                        {% endif %}
+
                         </tbody>
                     </table>
                 </div>
